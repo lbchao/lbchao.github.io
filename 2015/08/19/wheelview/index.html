@@ -5,25 +5,16 @@
   
   <title>wheelview | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文通过一个底部弹出的视图，显示一个可滚动的选择器，以后可扩展为时间及其他选择器，主要用到了获得activity的根视图及wheelview的使用。
-  日期选择博客的讲解链接  wheelview源码链接
-  activity 代码
-  123456789101112131415161718192021  public class WheelViewActivity extends AppCom">
+  <meta name="description" content="wheelView的使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wheelview">
 <meta property="og:url" content="http://yoursite.com/2015/08/19/wheelview/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本文通过一个底部弹出的视图，显示一个可滚动的选择器，以后可扩展为时间及其他选择器，主要用到了获得activity的根视图及wheelview的使用。
-  日期选择博客的讲解链接  wheelview源码链接
-  activity 代码
-  123456789101112131415161718192021  public class WheelViewActivity extends AppCom">
-<meta property="og:updated_time" content="2015-08-19T14:43:51.391Z">
+<meta property="og:description" content="wheelView的使用">
+<meta property="og:updated_time" content="2015-08-19T14:45:28.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wheelview">
-<meta name="twitter:description" content="本文通过一个底部弹出的视图，显示一个可滚动的选择器，以后可扩展为时间及其他选择器，主要用到了获得activity的根视图及wheelview的使用。
-  日期选择博客的讲解链接  wheelview源码链接
-  activity 代码
-  123456789101112131415161718192021  public class WheelViewActivity extends AppCom">
+<meta name="twitter:description" content="wheelView的使用">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -91,8 +82,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<p>本文通过一个底部弹出的视图，显示一个可滚动的选择器，以后可扩展为时间及其他选择器，主要用到了获得activity的根视图及wheelview的使用。</p>
+        <p>wheelView的使用<br><a id="more"></a><br>本文通过一个底部弹出的视图，显示一个可滚动的选择器，以后可扩展为时间及其他选择器，主要用到了获得activity的根视图及wheelview的使用。</p>
 <p>  <a href="http://blog.csdn.net/a1031359915/article/details/17529223" target="_blank" rel="external">日期选择博客的讲解链接</a><br>  <a href="https://github.com/ychavan007/android-wheel" target="_blank" rel="external">wheelview源码链接</a></p>
 <p>  activity 代码</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WheelViewActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.btn_show)</span><br><span class="line">    Button mBtnShow;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> BottomWheelView  mBottomWheelView;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_wheel_view);</span><br><span class="line">        ButterKnife.inject(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_show)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWheelView</span><span class="params">()</span></span>&#123;</span><br><span class="line">           mBottomWheelView=<span class="keyword">new</span> BottomWheelView(<span class="keyword">this</span>);</span><br><span class="line">          mBottomWheelView.attchView(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -105,10 +95,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/wheelview/" data-id="cidiw3qtx0003tsfhgt5decxn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/wheelview/" data-id="cidiw5uma0003tofh1epd4owr" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wheelview-wheelView的使用/">wheelview wheelView的使用</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wheelview/">wheelview</a></li></ul>
 
     </footer>
   </div>
@@ -137,7 +127,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/">EventBus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design/">design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wheelview-wheelView的使用/">wheelview wheelView的使用</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/">EventBus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design/">design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wheelview/">wheelview</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -146,7 +136,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/EventBus/" style="font-size: 10px;">EventBus</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/wheelview-wheelView的使用/" style="font-size: 10px;">wheelview wheelView的使用</a>
+      <a href="/tags/EventBus/" style="font-size: 10px;">EventBus</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/wheelview/" style="font-size: 10px;">wheelview</a>
     </div>
   </div>
 
