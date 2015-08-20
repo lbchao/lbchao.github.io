@@ -5,16 +5,16 @@
   
   <title>wheelview | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="wheelView的使用">
+  <meta name="description" content="wheelView的使用，参考开源项目，以后可制作成底部弹出的选择器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wheelview">
 <meta property="og:url" content="http://yoursite.com/2015/08/19/wheelview/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="wheelView的使用">
-<meta property="og:updated_time" content="2015-08-19T14:45:28.405Z">
+<meta property="og:description" content="wheelView的使用，参考开源项目，以后可制作成底部弹出的选择器">
+<meta property="og:updated_time" content="2015-08-20T15:37:33.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wheelview">
-<meta name="twitter:description" content="wheelView的使用">
+<meta name="twitter:description" content="wheelView的使用，参考开源项目，以后可制作成底部弹出的选择器">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,7 +82,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>wheelView的使用<br><a id="more"></a><br>本文通过一个底部弹出的视图，显示一个可滚动的选择器，以后可扩展为时间及其他选择器，主要用到了获得activity的根视图及wheelview的使用。</p>
+        <p>wheelView的使用，参考开源项目，以后可制作成底部弹出的选择器<br><a id="more"></a><br>本文通过一个底部弹出的视图，显示一个可滚动的选择器，以后可扩展为时间及其他选择器，主要用到了获得activity的根视图及wheelview的使用。</p>
 <p>  <a href="http://blog.csdn.net/a1031359915/article/details/17529223" target="_blank" rel="external">日期选择博客的讲解链接</a><br>  <a href="https://github.com/ychavan007/android-wheel" target="_blank" rel="external">wheelview源码链接</a></p>
 <p>  activity 代码</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WheelViewActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.btn_show)</span><br><span class="line">    Button mBtnShow;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> BottomWheelView  mBottomWheelView;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_wheel_view);</span><br><span class="line">        ButterKnife.inject(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_show)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWheelView</span><span class="params">()</span></span>&#123;</span><br><span class="line">           mBottomWheelView=<span class="keyword">new</span> BottomWheelView(<span class="keyword">this</span>);</span><br><span class="line">          mBottomWheelView.attchView(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -95,7 +95,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/wheelview/" data-id="cidiw5uma0003tofh1epd4owr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/wheelview/" data-id="cidkdh7d50003wofhrjrfcpqm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wheelview/">wheelview</a></li></ul>
