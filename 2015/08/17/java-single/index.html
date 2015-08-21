@@ -5,16 +5,16 @@
   
   <title>java_single | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java单例模式">
+  <meta name="description" content="java单例模式的讲解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java_single">
 <meta property="og:url" content="http://yoursite.com/2015/08/17/java-single/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java单例模式">
-<meta property="og:updated_time" content="2015-08-17T15:21:21.623Z">
+<meta property="og:description" content="java单例模式的讲解">
+<meta property="og:updated_time" content="2015-08-21T14:17:39.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java_single">
-<meta name="twitter:description" content="java单例模式">
+<meta name="twitter:description" content="java单例模式的讲解">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,7 +82,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>java单例模式<br><a id="more"></a><br>单例模式，要求一个类中有且仅有一个对象，如果出现多个对象就会出现“不良反应”，可以采用单例模式。</p>
+        <p>java单例模式的讲解<br><a id="more"></a><br>单例模式，要求一个类中有且仅有一个对象，如果出现多个对象就会出现“不良反应”，可以采用单例模式。</p>
 <p>单例模式需要注意事项：</p>
 <p>高并发情况下，需要注意单例模式的线程同步问题，如下单例代码：<br>//懒汉式单例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton=<span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">//限制产生多个对象</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获得实例</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(singleton==<span class="keyword">null</span>)&#123;</span><br><span class="line">			singleton=<span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> singleton;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>//该单例模式在低并发情况下不会出现问题，如系统压力增大，并发量增加时则可能在内存中出现多个实例，破坏了最初的预期。<br>如一个线程执行到singleton=new Singleton();但是还没有获得对象（对象的初始化是需要时间的），<br>第二个线程B执行到了if(singleton==null)判断，那么线程B获得判断条件为真，也行运行下去，线程A获得了一个对象，线程B也获得了一个对象，内存中存在两个对象。</p>
@@ -95,7 +95,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/java-single/" data-id="cidkdh7pa000fwofhhoug5ybc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/java-single/" data-id="cidlq281j000fpgfh4ibiu986" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/design/">design</a></li></ul>
