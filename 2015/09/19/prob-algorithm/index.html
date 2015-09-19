@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>prob_algorithm | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="概率算法大致分为以下几种形式：1.数值概率算法2.蒙特卡罗算法3.拉斯维加斯算法4.舍伍德算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="prob_algorithm">
+<meta property="og:url" content="http://yoursite.com/2015/09/19/prob-algorithm/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
+<meta property="og:description" content="概率算法大致分为以下几种形式：1.数值概率算法2.蒙特卡罗算法3.拉斯维加斯算法4.舍伍德算法">
+<meta property="og:updated_time" content="2015-09-19T03:24:22.516Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description">
+<meta name="twitter:title" content="prob_algorithm">
+<meta name="twitter:description" content="概率算法大致分为以下几种形式：1.数值概率算法2.蒙特卡罗算法3.拉斯维加斯算法4.舍伍德算法">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,12 +60,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-support-content-multi-content-item-listview" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-prob-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/07/30/support-content-multi-content-item-listview/" class="article-date">
-  <time datetime="2015-07-30T13:27:59.000Z" itemprop="datePublished">2015-07-30</time>
+    <a href="/2015/09/19/prob-algorithm/" class="article-date">
+  <time datetime="2015-09-19T03:22:29.000Z" itemprop="datePublished">2015-09-19</time>
 </a>
     
   </div>
@@ -74,8 +73,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/30/support-content-multi-content-item-listview/">support_content-multi_content_item_listview</a>
+    <h1 class="article-title" itemprop="name">
+      prob_algorithm
     </h1>
   
 
@@ -83,75 +82,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用listivew，要求在每个item里可显示多行数据，并支持展开及收起的操作，具体实现原理如下。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/07/30/support-content-multi-content-item-listview/#more">Read More</a>
-          </p>
-        
+        <p>概率算法大致分为以下几种形式：<br>1.数值概率算法<br>2.蒙特卡罗算法<br>3.拉斯维加斯算法<br>4.舍伍德算法<br><a id="more"></a><br>这里通过一个实例看看蒙特卡罗概率算的应用，该算法的一个应用是计算圆周率</p>
+<p>思想：<br>思想很简单，首先看一个圆，半径为1，<br>S圆=π<em>r</em>r;<br>阴影部分占圆的1/4，阴影部分面积<br>S阴影=S圆/4=π<em>r</em>r/4=π/4;<br>阴影所在正方形面积S正=r*r=1;<br>这样，按照图建立一个坐标系，均匀的向正方形撒点，那么落入阴影部分的点数和全部的点数之比就是S阴/S正=π/4；</p>
+<p>根据概率统计规律，只要撒的点足够多，那么将得到近似的结果，通过这个方法计算圆周率，<br>关键点，，均匀撒点，区域判断</p>
+<p>实例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">mathTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 蒙特卡罗概率算法</span><br><span class="line">	 * <span class="doctag">@param</span> args</span><br><span class="line">	 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">int</span> n=<span class="number">500000</span>;</span><br><span class="line">		<span class="keyword">double</span> PI=MontePI(n);</span><br><span class="line">		System.out.println(<span class="string">"圆周率"</span>+PI);</span><br><span class="line">        <span class="comment">//圆周率3.142792  </span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">double</span>  <span class="title">MontePI</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">		<span class="keyword">double</span> PI = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">double</span> x,y;</span><br><span class="line">		<span class="keyword">int</span> i;</span><br><span class="line">		<span class="keyword">double</span> sum;</span><br><span class="line">		sum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>( i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">			x=Math.random();</span><br><span class="line">			y=Math.random();</span><br><span class="line">			<span class="keyword">if</span>((x*x+y*y)&lt;=<span class="number">1</span>)&#123; <span class="comment">//若在阴影区域</span></span><br><span class="line">				sum++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		PI=<span class="number">4</span>*sum/n;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> PI;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/support-content-multi-content-item-listview/" data-id="cieqihjeq00069ofh6cp4cr1g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/19/prob-algorithm/" data-id="cieqihjey000d9ofh78mbw1py" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-custom-dialog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/07/29/custom-dialog/" class="article-date">
-  <time datetime="2015-07-29T13:30:21.000Z" itemprop="datePublished">2015-07-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/29/custom-dialog/">custom_dialog</a>
-    </h1>
+    <a href="/2015/09/15/chrome-custom-tab/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">chrome_custom_tab</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="android_custome_dialog">android custome dialog</h1><p>  custom dialog contant dialog and dialogFragment<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/07/29/custom-dialog/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/custom-dialog/" data-id="cieqihjfu00119ofh99xhbqv5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-  
 </section>
         
           <aside id="sidebar">
