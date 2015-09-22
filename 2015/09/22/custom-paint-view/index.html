@@ -3,21 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>custom_paint_view | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 自定义view实现画板功能date: 2015-09-22 22:40:26
-tags: android使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。">
+  <meta name="description" content="使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2015/09/22/paint-view/index.html">
+<meta property="og:title" content="custom_paint_view">
+<meta property="og:url" content="http://yoursite.com/2015/09/22/custom-paint-view/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: 自定义view实现画板功能date: 2015-09-22 22:40:26
-tags: android使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。">
-<meta property="og:updated_time" content="2015-09-22T14:52:22.535Z">
+<meta property="og:description" content="使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。">
+<meta property="og:updated_time" content="2015-09-22T15:02:40.247Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="title: 自定义view实现画板功能date: 2015-09-22 22:40:26
-tags: android使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。">
+<meta name="twitter:title" content="custom_paint_view">
+<meta name="twitter:description" content="使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -63,21 +60,29 @@ tags: android使用自定义view定义视图，并涂鸦，且保存到本地及
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-paint-view" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-custom-paint-view" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/09/22/paint-view/" class="article-date">
-  <time datetime="2015-09-22T14:52:22.535Z" itemprop="datePublished">2015-09-22</time>
+    <a href="/2015/09/22/custom-paint-view/" class="article-date">
+  <time datetime="2015-09-22T15:01:46.000Z" itemprop="datePublished">2015-09-22</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      custom_paint_view
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: 自定义view实现画板功能<br>date: 2015-09-22 22:40:26</p>
-<h2 id="tags:_android">tags: android</h2><p>使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。<br><a id="more"></a><br>代码如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaintViewActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.btn_clear)</span><br><span class="line">    Button btnClear;</span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.btn_save)</span><br><span class="line">    Button btnSave;</span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.ll_top)</span><br><span class="line">    LinearLayout llTop;</span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.paint_view)</span><br><span class="line">    PaintView paintView;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_paint_view);</span><br><span class="line">        ButterKnife.inject(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_clear)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        paintView.clearPainOperation();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_save)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        paintView.saveToLocalStorageOperation(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>使用自定义view定义视图，并涂鸦，且保存到本地及擦除的功能。<br><a id="more"></a><br>代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaintViewActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.btn_clear)</span><br><span class="line">    Button btnClear;</span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.btn_save)</span><br><span class="line">    Button btnSave;</span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.ll_top)</span><br><span class="line">    LinearLayout llTop;</span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.paint_view)</span><br><span class="line">    PaintView paintView;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_paint_view);</span><br><span class="line">        ButterKnife.inject(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_clear)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        paintView.clearPainOperation();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_save)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        paintView.saveToLocalStorageOperation(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>布局如下</p>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    xmlns:<span class="variable">app=</span><span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span></span><br><span class="line">    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span></span><br><span class="line">    android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:<span class="variable">id=</span><span class="string">"@+id/ll_top"</span></span><br><span class="line">        android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span></span><br><span class="line">        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span></span><br><span class="line">        android:<span class="variable">layout_alignParentTop=</span><span class="string">"true"</span></span><br><span class="line">        android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:<span class="variable">id=</span><span class="string">"@+id/btn_clear"</span></span><br><span class="line">            android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span></span><br><span class="line">            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span></span><br><span class="line">            android:<span class="variable">layout_weight=</span><span class="string">"1"</span></span><br><span class="line">            android:<span class="variable">text=</span><span class="string">"clear"</span> /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:<span class="variable">id=</span><span class="string">"@+id/btn_save"</span></span><br><span class="line">            android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span></span><br><span class="line">            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span></span><br><span class="line">            android:<span class="variable">layout_weight=</span><span class="string">"1"</span></span><br><span class="line">            android:<span class="variable">text=</span><span class="string">"save"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;com.example.lin.myapplication.view.PaintView</span><br><span class="line">        android:<span class="variable">id=</span><span class="string">"@+id/paint_view"</span></span><br><span class="line">        android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span></span><br><span class="line">        android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span></span><br><span class="line">        android:<span class="variable">layout_below=</span><span class="string">"@+id/ll_top"</span></span><br><span class="line">        app:<span class="variable">paint_view_hint=</span><span class="string">"@string/paint_view_hint"</span> /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
 <p>属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">declare-styleable</span> <span class="attribute">name</span>=<span class="value">"PaintView"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"paint_view_hint"</span> <span class="attribute">format</span>=<span class="value">"string"</span>&gt;</span><span class="tag">&lt;/<span class="title">attr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -87,9 +92,11 @@ tags: android使用自定义view定义视图，并涂鸦，且保存到本地及
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/22/paint-view/" data-id="cievhex26000em4fht1pt0mxf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/22/custom-paint-view/" data-id="cievhsb560011ngfhl375itzn" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
     </footer>
   </div>
   
@@ -117,7 +124,7 @@ tags: android使用自定义view定义视图，并涂鸦，且保存到本地及
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源项目/">开源项目</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源项目/">开源项目</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -147,7 +154,7 @@ tags: android使用自定义view定义视图，并涂鸦，且保存到本地及
       <ul>
         
           <li>
-            <a href="/2015/09/22/paint-view/">(no title)</a>
+            <a href="/2015/09/22/custom-paint-view/">custom_paint_view</a>
           </li>
         
           <li>
