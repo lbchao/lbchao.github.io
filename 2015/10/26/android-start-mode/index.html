@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android_start_mode | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="创建activity的时候，在配置文件里有时我们会使用到activity的启动模式，当然，默认没有设置的时候，该activity也会有一个默认的启动模式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android_start_mode">
+<meta property="og:url" content="http://yoursite.com/2015/10/26/android-start-mode/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="创建activity的时候，在配置文件里有时我们会使用到activity的启动模式，当然，默认没有设置的时候，该activity也会有一个默认的启动模式。">
+<meta property="og:updated_time" content="2015-10-26T14:16:22.444Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android_start_mode">
+<meta name="twitter:description" content="创建activity的时候，在配置文件里有时我们会使用到activity的启动模式，当然，默认没有设置的时候，该activity也会有一个默认的启动模式。">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-android-start-mode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/26/android-start-mode/" class="article-date">
+  <time datetime="2015-10-26T14:14:39.000Z" itemprop="datePublished">2015-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android_start_mode
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>创建activity的时候，在配置文件里有时我们会使用到activity的启动模式，当然，默认没有设置的时候，该activity也会有一个默认的启动模式。<br><a id="more"></a><br>Activity 有四种加载模式，在AndroidManifest.xml文件中activity元素的android:launchMode属性进行配置:</p>
+<pre><code><span class="comment"><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">standard</span></span><br><span class="line">singleTop</span><br><span class="line">singleTask</span><br><span class="line">singleInstance</span><br></pre></td></tr></table></figure></span>
+</code></pre><p>standard，系统默认的activity启动模式<br>可以被多次实例化，同一个Activity中的不同实例可以存在于不同的Task中，同一个Task也可以存在多个Activity实例。<br>(标准模式，一调用startActivity()方法就会产生一个新的实例)</p>
+<p>singleTop<br>如果寄存Activity的栈顶为该Activity，则直接用该Activity实例；否则创建新实例.<br>( 如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。)</p>
+<p>singleTask<br>如果在栈中已经有该Activity的实例，就重用该实例(会调用实例的onNewIntent())。重用时，会让该实例回到栈顶，因此在它上面的实例将会被移除栈。如果栈中不存在该实例，将会创建新的实例放入栈中.<br>(会在一个新的task中产生这个实例，以后每次调用都会使用这个，不会去产生新的实例了)</p>
+<p>singleInstance<br> 在一个新栈中创建该Activity实例，并让多个应用共享改栈中的该Activity实例。一旦改模式的Activity的实例存在于某个栈中，任何应用再激活改Activity时都会重用该栈中的实例，其效果相当于多个应用程序共享一个应用，不管谁激活该Activity都会进入同一个应用中.<br> (这个跟singleTask基本上是一样，只有一个区别：在这个模式下的Activity实例所处的task中，只能有这个activity实例，不能有其他的实例。)</p>
+<p> 模式代码示例</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StartUpModeActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"StartUpModeActivity"</span>;</span><br><span class="line">    <span class="annotation">@Bind</span>(R.id.btn_turn)</span><br><span class="line">    Button mBtnTurn;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_start_up_mode);</span><br><span class="line">        ButterKnife.bind(<span class="keyword">this</span>);</span><br><span class="line">        Logger.d(TAG, <span class="string">" onCreate(Bundle savedInstanceState):"</span> + <span class="keyword">this</span>.getClass().getSimpleName() +</span><br><span class="line">                <span class="string">"taskId:"</span> + getTaskId() + <span class="string">"hasCode:"</span> + <span class="keyword">this</span>.hashCode());</span><br><span class="line">        showActivityInfo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_turn)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnToActivity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, StartUpModeActivity.class);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onNewIntent</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onNewIntent(intent);</span><br><span class="line">        Logger.d(TAG, <span class="string">"onNewIntent(Intent intent):"</span> + <span class="keyword">this</span>.getClass().getSimpleName() +</span><br><span class="line">                <span class="string">"taskId:"</span> + getTaskId() + <span class="string">"hasCode:"</span> + <span class="keyword">this</span>.hashCode());</span><br><span class="line">        showActivityInfo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showActivityInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ActivityInfo info = <span class="keyword">this</span>.getPackageManager()</span><br><span class="line">                    .getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);</span><br><span class="line">            <span class="comment">//包名</span></span><br><span class="line">            Log.e(TAG, <span class="string">"taskAffinity:"</span> + info.taskAffinity);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (PackageManager.NameNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> standard mode<br> <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">onCreate</span>(<span class="tag">Bundle</span> <span class="tag">savedInstanceState</span>)<span class="pseudo">:StartUpModeActivitytaskId</span><span class="pseudo">:8237hasCode</span><span class="pseudo">:138326278</span></span><br><span class="line"><span class="tag">onCreate</span>(<span class="tag">Bundle</span> <span class="tag">savedInstanceState</span>)<span class="pseudo">:StartUpModeActivitytaskId</span><span class="pseudo">:8237hasCode</span><span class="pseudo">:955410342</span></span><br></pre></td></tr></table></figure></p>
+<p> taskID是不变的，但是每次都是生成不同的实例。</p>
+<p> singletop mode<br> <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">onCreate</span>(<span class="tag">Bundle</span> <span class="tag">savedInstanceState</span>)<span class="pseudo">:StartUpModeActivitytaskId</span><span class="pseudo">:8238hasCode</span><span class="pseudo">:821841204</span></span><br><span class="line"><span class="tag">onNewIntent</span>(<span class="tag">Intent</span> <span class="tag">intent</span>)<span class="pseudo">:StartUpModeActivitytaskId</span><span class="pseudo">:8238hasCode</span><span class="pseudo">:821841204</span></span><br><span class="line"><span class="tag">onNewIntent</span>(<span class="tag">Intent</span> <span class="tag">intent</span>)<span class="pseudo">:StartUpModeActivitytaskId</span><span class="pseudo">:8238hasCode</span><span class="pseudo">:821841204</span></span><br></pre></td></tr></table></figure></p>
+<p> 只有位于栈顶的时候，存在activity，会调用onNewIntent否则会重新创建新的实例。</p>
+<p> singleTask mode<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StartUpModeActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"StartUpModeActivity"</span>;</span><br><span class="line">    <span class="annotation">@Bind</span>(R.id.btn_turn)</span><br><span class="line">    Button mBtnTurn;</span><br><span class="line">    <span class="annotation">@Bind</span>(R.id.btn_turn_to)</span><br><span class="line">    Button mBtnTurnTo;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_start_up_mode);</span><br><span class="line">        ButterKnife.bind(<span class="keyword">this</span>);</span><br><span class="line">        Logger.d(TAG, <span class="string">" onCreate(Bundle savedInstanceState):"</span> + <span class="keyword">this</span>.getClass().getSimpleName() +</span><br><span class="line">                <span class="string">"taskId:"</span> + getTaskId() + <span class="string">"hasCode:"</span> + <span class="keyword">this</span>.hashCode());</span><br><span class="line">        showActivityInfo();</span><br><span class="line">        getActivityTasks();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_turn)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnToActivity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, StartUpModeActivity.class);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@OnClick</span>(R.id.btn_turn_to)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnToOtherActivity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Intent intent=<span class="keyword">new</span> Intent(<span class="keyword">this</span>,NotificationActivity.class);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onNewIntent</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onNewIntent(intent);</span><br><span class="line">        Logger.d(TAG, <span class="string">"onNewIntent(Intent intent):"</span> + <span class="keyword">this</span>.getClass().getSimpleName() +</span><br><span class="line">                <span class="string">"taskId:"</span> + getTaskId() + <span class="string">"hasCode:"</span> + <span class="keyword">this</span>.hashCode());</span><br><span class="line">        showActivityInfo();</span><br><span class="line">        getActivityTasks();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showActivityInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ActivityInfo info = <span class="keyword">this</span>.getPackageManager()</span><br><span class="line">                    .getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);</span><br><span class="line">            <span class="comment">//包名</span></span><br><span class="line">            Log.e(TAG, <span class="string">"taskAffinity:"</span> + info.taskAffinity);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (PackageManager.NameNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getActivityTasks</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ActivityManager manager= (ActivityManager) <span class="keyword">this</span>.getSystemService(ACTIVITY_SERVICE);</span><br><span class="line">        List&lt;ActivityManager.RunningTaskInfo&gt; list=manager.getRunningTasks(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++)&#123;</span><br><span class="line">            Logger.d(TAG,<span class="string">"task:"</span>+list.get(i).topActivity.getClassName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotificationActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bind</span>(R.id.btn_left)</span><br><span class="line">    Button mBtnLeft;</span><br><span class="line">    <span class="annotation">@Bind</span>(R.id.btn_right)</span><br><span class="line">    Button mBtnRight;</span><br><span class="line">    <span class="annotation">@Bind</span>(R.id.btn_middle)</span><br><span class="line">    Button mBtnMiddle;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//  normal /big_picture/in_box_notification notification</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NORMAL_TYPE_NOTIFICATION = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BIG_PICTURE_TYPE_NOTIFICATION = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IN_BOX_TYPE_NOTIFICATION = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> REQUEST_CODE = <span class="number">22</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID = <span class="number">25</span>;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_notification);</span><br><span class="line">        ButterKnife.bind(<span class="keyword">this</span>);</span><br><span class="line">        getActivityTasks();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getActivityTasks</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ActivityManager manager= (ActivityManager) <span class="keyword">this</span>.getSystemService(ACTIVITY_SERVICE);</span><br><span class="line">        List&lt;ActivityManager.RunningTaskInfo&gt; list=manager.getRunningTasks(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++)&#123;</span><br><span class="line">            Logger.d(<span class="string">"NotificationActivity"</span>, <span class="string">"task:"</span> + list.get(i).topActivity.getClassName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>:StartUpModeActivitytaskId:<span class="number">8244</span>hasCode:<span class="number">443736094</span></span><br><span class="line">task:kankan<span class="class">.test</span><span class="class">.com</span><span class="class">.lin</span><span class="class">.activity</span><span class="class">.StartUpModeActivity</span></span><br><span class="line"> task:kankan<span class="class">.test</span><span class="class">.com</span><span class="class">.lin</span><span class="class">.activity</span><span class="class">.NotificationActivity</span></span><br><span class="line"> <span class="function"><span class="title">onNewIntent</span><span class="params">(Intent intent)</span></span>:StartUpModeActivitytaskId:<span class="number">8244</span>hasCode:<span class="number">443736094</span></span><br><span class="line"> task:kankan<span class="class">.test</span><span class="class">.com</span><span class="class">.lin</span><span class="class">.activity</span><span class="class">.StartUpModeActivity</span></span><br><span class="line"> <span class="function"><span class="title">onNewIntent</span><span class="params">(Intent intent)</span></span>:StartUpModeActivitytaskId:<span class="number">8244</span>hasCode:<span class="number">443736094</span></span><br></pre></td></tr></table></figure>
+<p> (先进入startupactivity-&gt;notificationActivity-&gt;startupactivity-&gt;)<br> 栈中又实例，重新调用，并且移除它之上的实例，否则创建。</p>
+<p> singleInstance mode</p>
+<p> 代码类似于上边的代码，只是在notificationactivity打印出所在栈信息<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotificationActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="annotation">@Bind</span>(R.id.btn_left)</span><br><span class="line">   Button mBtnLeft;</span><br><span class="line">   <span class="annotation">@Bind</span>(R.id.btn_right)</span><br><span class="line">   Button mBtnRight;</span><br><span class="line">   <span class="annotation">@Bind</span>(R.id.btn_middle)</span><br><span class="line">   Button mBtnMiddle;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//  normal /big_picture/in_box_notification notification</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NORMAL_TYPE_NOTIFICATION = <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BIG_PICTURE_TYPE_NOTIFICATION = <span class="number">2</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IN_BOX_TYPE_NOTIFICATION = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> REQUEST_CODE = <span class="number">22</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID = <span class="number">25</span>;</span><br><span class="line"></span><br><span class="line">   <span class="annotation">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">       setContentView(R.layout.activity_notification);</span><br><span class="line">       ButterKnife.bind(<span class="keyword">this</span>);</span><br><span class="line">       getActivityTasks();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getActivityTasks</span><span class="params">()</span></span>&#123;</span><br><span class="line">       Logger.d(<span class="string">"NotificationActivity"</span>, <span class="string">"onNewIntent(Intent intent):"</span> + <span class="keyword">this</span>.getClass().getSimpleName() +</span><br><span class="line">               <span class="string">"taskId:"</span> + getTaskId() + <span class="string">"hasCode:"</span> + <span class="keyword">this</span>.hashCode());</span><br><span class="line">       ActivityManager manager= (ActivityManager) <span class="keyword">this</span>.getSystemService(ACTIVITY_SERVICE);</span><br><span class="line">       List&lt;ActivityManager.RunningTaskInfo&gt; list=manager.getRunningTasks(<span class="number">1</span>);</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++)&#123;</span><br><span class="line">           Logger.d(<span class="string">"NotificationActivity"</span>, <span class="string">"task:"</span> + list.get(i).topActivity.getClassName());</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> StartUpModeActivity:  <span class="function"><span class="title">onCreate</span><span class="params">(Bundle    savedInstanceState)</span></span>:StartUpModeActivitytaskId:<span class="number">8252</span>hasCode:<span class="number">971563050</span></span><br><span class="line"> StartUpModeActivity: task:kankan<span class="class">.test</span><span class="class">.com</span><span class="class">.lin</span><span class="class">.activity</span><span class="class">.StartUpModeActivity</span></span><br><span class="line">NotificationActivity: <span class="function"><span class="title">onNewIntent</span><span class="params">(Intent intent)</span></span>:NotificationActivitytaskId:<span class="number">8250</span>hasCode:<span class="number">216834661</span></span><br><span class="line">NotificationActivity: task:kankan<span class="class">.test</span><span class="class">.com</span><span class="class">.lin</span><span class="class">.activity</span><span class="class">.NotificationActivity</span></span><br><span class="line">StartUpModeActivity: <span class="function"><span class="title">onNewIntent</span><span class="params">(Intent intent)</span></span>:StartUpModeActivitytaskId:<span class="number">8252</span>hasCode:<span class="number">971563050</span></span><br><span class="line">StartUpModeActivity: task:kankan<span class="class">.test</span><span class="class">.com</span><span class="class">.lin</span><span class="class">.activity</span><span class="class">.StartUpModeActivity</span></span><br><span class="line">StartUpModeActivity: <span class="function"><span class="title">onNewIntent</span><span class="params">(Intent intent)</span></span>:StartUpModeActivitytaskId:<span class="number">8252</span>hasCode:<span class="number">971563050</span></span><br></pre></td></tr></table></figure>
+<p>同singleTask模式相同，唯一的不同就是改实例所在的栈中，只能有该实例，不能有其他实例。如日志所示，startupactivity栈中只有唯一的一个相同的实例。</p>
+<p>其他 ，在使用activity的启动模式时，我们还要注意的是设置的标识</p>
+<p>例如：</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">FLAG_ACTIVITY_NO_HISTORY</span></span><br><span class="line"></span><br><span class="line"><span class="variable">FLAG_ACTIVITY_CLEAR_TASK</span></span><br><span class="line"></span><br><span class="line"><span class="variable">FLAG_ACTIVITY_SINGLE_TOP</span></span><br><span class="line"></span><br><span class="line"><span class="variable">FLAG_ACTIVITY_CLEAR_TOP</span></span><br><span class="line"></span><br><span class="line"><span class="variable">FLAG_ACTIVITY_NEW_TASK</span></span><br><span class="line"></span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+<p>通过字面意思我们就能知道这些标识符的含义，可以在实际使用中灵活的搭配，达到不同的目的，详情的含义请参照Intent.java源码，查看注释即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/26/android-start-mode/" data-id="cig812gkw001kx0fh41kjgl68" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/23/android-event/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android_event</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源项目/">开源项目</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码分析/">源码分析</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/开源项目/" style="font-size: 10px;">开源项目</a> <a href="/tags/源码分析/" style="font-size: 13.33px;">源码分析</a> <a href="/tags/算法/" style="font-size: 16.67px;">算法</a> <a href="/tags/设计模式/" style="font-size: 16.67px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/26/android-start-mode/">android_start_mode</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/23/android-event/">android_event</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/21/select-sort/">select_sort</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/21/view-draw-process/">view_draw_process</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/13/jianzaozhe-mode/">jianzaozhe-mode</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
